@@ -5,8 +5,16 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-KEYWORDS = 'ti:"Signal Processing"'
-search = arxiv.Search(query=KEYWORDS, max_results=10, sort_by=arxiv.SortCriterion.SubmittedDate)
+# Grouping related concepts to avoid a "wall of text" and improve readability
+RADAR_TYPES = 'ti:"FMCW" OR ti:"PMCW" OR ti:"MIMO" OR ti:"multistatic" OR ti:"virtual aperture"'
+AUTOMOTIVE = 'ti:"automotive radar" OR ti:"77 GHz" OR ti:"79 GHz" OR ti:"ADAS"'
+SIGNAL_PROC = 'ti:"signal processing" OR ti:"micro-Doppler" OR ti:"DoA estimation" OR ti:"beamforming"'
+SPARSE_RECOVERY = 'ti:"compressive sensing" OR ti:"sparse signal recovery" OR ti:"sparse Bayesian learning" OR ti:"SBL"'
+HYBRID_METHODS = 'ti:"hybrid modelling" OR ti:"physics-informed" OR ti:"deep unrolling" OR ti:"learned iterative"'
+
+# Combine everything into one master query
+KEYWORDS = f"({RADAR_TYPES} OR {AUTOMOTIVE} OR {SIGNAL_PROC} OR {SPARSE_RECOVERY} OR {HYBRID_METHODS})"
+search = arxiv.Search(query=KEYWORDS, max_results=1000, sort_by=arxiv.SortCriterion.SubmittedDate)
 
 now = datetime.datetime.now(datetime.timezone.utc)
 yesterday = now - datetime.timedelta(days=1)
