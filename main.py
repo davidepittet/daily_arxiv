@@ -14,7 +14,7 @@ HYBRID_METHODS = 'ti:"hybrid modelling" OR ti:"physics-informed" OR ti:"deep unr
 
 # Combine everything into one master query
 KEYWORDS = f"({RADAR_TYPES} OR {AUTOMOTIVE} OR {SIGNAL_PROC} OR {SPARSE_RECOVERY} OR {HYBRID_METHODS})"
-search = arxiv.Search(query=KEYWORDS, max_results=1000, sort_by=arxiv.SortCriterion.SubmittedDate)
+search = arxiv.Search(query=KEYWORDS, max_results=100, sort_by=arxiv.SortCriterion.SubmittedDate)
 
 now = datetime.datetime.now(datetime.timezone.utc)
 yesterday = now - datetime.timedelta(days=1)
